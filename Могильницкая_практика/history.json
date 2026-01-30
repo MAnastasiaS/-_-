@@ -1,0 +1,825 @@
+[
+  {
+    "id": "c7e9bce3-c920-45d1-9b6d-fc4a87d5fe35",
+    "timestamp": "2026-01-26T22:57:27.650280",
+    "filename": "1.jpg",
+    "luggage_count": 13,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.78,
+        "bbox": [
+          174,
+          318,
+          467,
+          511
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.74,
+        "bbox": [
+          506,
+          226,
+          604,
+          271
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.68,
+        "bbox": [
+          547,
+          192,
+          650,
+          269
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.65,
+        "bbox": [
+          562,
+          173,
+          666,
+          231
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.62,
+        "bbox": [
+          386,
+          266,
+          549,
+          379
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.58,
+        "bbox": [
+          342,
+          312,
+          498,
+          448
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.53,
+        "bbox": [
+          467,
+          253,
+          599,
+          346
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.47,
+        "bbox": [
+          464,
+          261,
+          577,
+          352
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.44,
+        "bbox": [
+          1,
+          468,
+          299,
+          564
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.43,
+        "bbox": [
+          508,
+          227,
+          604,
+          316
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.38,
+        "bbox": [
+          471,
+          232,
+          604,
+          324
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          423,
+          264,
+          566,
+          358
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          187,
+          428,
+          398,
+          558
+        ]
+      }
+    ],
+    "result_path": "results\\result_58855a80-0008-4e1a-8fb6-9b584fcd5f4a_1.jpg"
+  },
+  {
+    "id": "960b0a35-f2bf-47ad-a77c-69bcd37ce2ab",
+    "timestamp": "2026-01-26T22:57:56.669881",
+    "filename": "1.jpg",
+    "luggage_count": 13,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.78,
+        "bbox": [
+          174,
+          318,
+          467,
+          511
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.74,
+        "bbox": [
+          506,
+          226,
+          604,
+          271
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.68,
+        "bbox": [
+          547,
+          192,
+          650,
+          269
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.65,
+        "bbox": [
+          562,
+          173,
+          666,
+          231
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.62,
+        "bbox": [
+          386,
+          266,
+          549,
+          379
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.58,
+        "bbox": [
+          342,
+          312,
+          498,
+          448
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.53,
+        "bbox": [
+          467,
+          253,
+          599,
+          346
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.47,
+        "bbox": [
+          464,
+          261,
+          577,
+          352
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.44,
+        "bbox": [
+          1,
+          468,
+          299,
+          564
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.43,
+        "bbox": [
+          508,
+          227,
+          604,
+          316
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.38,
+        "bbox": [
+          471,
+          232,
+          604,
+          324
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          423,
+          264,
+          566,
+          358
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          187,
+          428,
+          398,
+          558
+        ]
+      }
+    ],
+    "result_path": "results\\result_8c3459da-46f0-4d78-a98f-b9b878e9445e_1.jpg"
+  },
+  {
+    "id": "676c90df-dfea-47d2-8886-42f162735cd1",
+    "timestamp": "2026-01-26T23:01:37.413773",
+    "filename": "1.jpg",
+    "luggage_count": 13,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.78,
+        "bbox": [
+          174,
+          318,
+          467,
+          511
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.74,
+        "bbox": [
+          506,
+          226,
+          604,
+          271
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.68,
+        "bbox": [
+          547,
+          192,
+          650,
+          269
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.65,
+        "bbox": [
+          562,
+          173,
+          666,
+          231
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.62,
+        "bbox": [
+          386,
+          266,
+          549,
+          379
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.58,
+        "bbox": [
+          342,
+          312,
+          498,
+          448
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.53,
+        "bbox": [
+          467,
+          253,
+          599,
+          346
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.47,
+        "bbox": [
+          464,
+          261,
+          577,
+          352
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.44,
+        "bbox": [
+          1,
+          468,
+          299,
+          564
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.43,
+        "bbox": [
+          508,
+          227,
+          604,
+          316
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.38,
+        "bbox": [
+          471,
+          232,
+          604,
+          324
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          423,
+          264,
+          566,
+          358
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          187,
+          428,
+          398,
+          558
+        ]
+      }
+    ],
+    "result_path": "results\\result_6518a55a-de4a-4ff6-a815-7d909d1d5ba3_1.jpg"
+  },
+  {
+    "id": "e5edb588-569c-4c67-9b65-f49252b39102",
+    "timestamp": "2026-01-26T23:02:04.167321",
+    "filename": "2.jpg",
+    "luggage_count": 6,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.9,
+        "bbox": [
+          664,
+          183,
+          904,
+          330
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.75,
+        "bbox": [
+          253,
+          233,
+          620,
+          451
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.7,
+        "bbox": [
+          38,
+          166,
+          292,
+          292
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.69,
+        "bbox": [
+          934,
+          150,
+          1116,
+          274
+        ]
+      },
+      {
+        "class": "backpack",
+        "confidence": 0.53,
+        "bbox": [
+          293,
+          77,
+          358,
+          142
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.48,
+        "bbox": [
+          692,
+          70,
+          777,
+          117
+        ]
+      }
+    ],
+    "result_path": "results\\result_5709444f-e002-4ee5-91cc-e8dca9d9cc26_2.jpg"
+  },
+  {
+    "id": "743a8f8e-50b5-46bd-89c2-0ce6c5a9fec4",
+    "timestamp": "2026-01-26T23:04:23.106038",
+    "filename": "1.jpg",
+    "luggage_count": 13,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.78,
+        "bbox": [
+          174,
+          318,
+          467,
+          511
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.74,
+        "bbox": [
+          506,
+          226,
+          604,
+          271
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.68,
+        "bbox": [
+          547,
+          192,
+          650,
+          269
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.65,
+        "bbox": [
+          562,
+          173,
+          666,
+          231
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.62,
+        "bbox": [
+          386,
+          266,
+          549,
+          379
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.58,
+        "bbox": [
+          342,
+          312,
+          498,
+          448
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.53,
+        "bbox": [
+          467,
+          253,
+          599,
+          346
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.47,
+        "bbox": [
+          464,
+          261,
+          577,
+          352
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.44,
+        "bbox": [
+          1,
+          468,
+          299,
+          564
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.43,
+        "bbox": [
+          508,
+          227,
+          604,
+          316
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.38,
+        "bbox": [
+          471,
+          232,
+          604,
+          324
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          423,
+          264,
+          566,
+          358
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.29,
+        "bbox": [
+          187,
+          428,
+          398,
+          558
+        ]
+      }
+    ],
+    "result_path": "results\\result_8a29faa0-9849-43a3-9cd3-43a26138196f_1.jpg"
+  },
+  {
+    "id": "325e3de4-35c8-4b0d-a368-fba43f5b979b",
+    "timestamp": "2026-01-29T12:49:58.923875",
+    "filename": "1.jpg",
+    "luggage_count": 9,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.87,
+        "bbox": [
+          597,
+          66,
+          874,
+          293
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.67,
+        "bbox": [
+          377,
+          143,
+          606,
+          296
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.66,
+        "bbox": [
+          228,
+          32,
+          536,
+          192
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.63,
+        "bbox": [
+          476,
+          199,
+          853,
+          472
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.59,
+        "bbox": [
+          318,
+          87,
+          603,
+          279
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.52,
+        "bbox": [
+          608,
+          312,
+          898,
+          566
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.42,
+        "bbox": [
+          407,
+          222,
+          605,
+          370
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.37,
+        "bbox": [
+          606,
+          200,
+          847,
+          389
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.3,
+        "bbox": [
+          483,
+          244,
+          718,
+          467
+        ]
+      }
+    ],
+    "result_path": "results\\result_352b6528-cb6d-40ba-9e3a-ad6f429e85b1_1.jpg"
+  },
+  {
+    "id": "683323d6-f25c-4c60-a563-403b4f81ec95",
+    "timestamp": "2026-01-29T13:21:40.768556",
+    "filename": "1.jpg",
+    "luggage_count": 9,
+    "detected_objects": [
+      {
+        "class": "suitcase",
+        "confidence": 0.87,
+        "bbox": [
+          597,
+          66,
+          874,
+          293
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.67,
+        "bbox": [
+          377,
+          143,
+          606,
+          296
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.66,
+        "bbox": [
+          228,
+          32,
+          536,
+          192
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.63,
+        "bbox": [
+          476,
+          199,
+          853,
+          472
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.59,
+        "bbox": [
+          318,
+          87,
+          603,
+          279
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.52,
+        "bbox": [
+          608,
+          312,
+          898,
+          566
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.42,
+        "bbox": [
+          407,
+          222,
+          605,
+          370
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.37,
+        "bbox": [
+          606,
+          200,
+          847,
+          389
+        ]
+      },
+      {
+        "class": "suitcase",
+        "confidence": 0.3,
+        "bbox": [
+          483,
+          244,
+          718,
+          467
+        ]
+      }
+    ],
+    "result_path": "results\\result_f695e868-9de9-4bd7-abae-8ab5ee753a9a_1.jpg"
+  }
+]

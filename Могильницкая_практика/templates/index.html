@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Подсчет багажа на ленте в аэропорту</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top left, #1b2a4a 0%, #050816 45%, #02010a 100%);
+            min-height: 100vh;
+            padding: 24px;
+            color: #e5e7eb;
+        }
+
+        .app-shell {
+            max-width: 1280px;
+            margin: 0 auto;
+            border-radius: 24px;
+            background: radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 55%),
+                        radial-gradient(circle at bottom right, rgba(129, 140, 248, 0.18), transparent 55%),
+                        rgba(15, 23, 42, 0.96);
+            box-shadow:
+                0 24px 80px rgba(0, 0, 0, 0.75),
+                0 0 0 1px rgba(148, 163, 184, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .app-header {
+            padding: 20px 28px 16px;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 14px;
+            background: conic-gradient(from 180deg at 50% 50%, #22c55e, #22d3ee, #3b82f6, #a855f7, #22c55e);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.9);
+        }
+
+        .brand-icon-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+            background: radial-gradient(circle at 30% 0%, #22c55e 0, #0f172a 45%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+        }
+
+        .brand-title {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .brand-title h1 {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #f9fafb;
+        }
+
+        .brand-title span {
+            font-size: 0.85rem;
+            color: #9ca3af;
+        }
+
+        .header-pills {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .header-pill {
+            font-size: 0.75rem;
+            padding: 6px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(148, 163, 184, 0.4);
+            color: #9ca3af;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            backdrop-filter: blur(10px);
+            background: linear-gradient(to right, rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.9));
+        }
+
+        .header-pill span {
+            display: inline-flex;
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+            box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.25);
+        }
+
+        .app-main {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+            gap: 0;
+            min-height: 540px;
+        }
+
+        @media (max-width: 960px) {
+            .app-main {
+                grid-template-columns: minmax(0, 1fr);
+            }
+        }
+
+        .panel {
+            padding: 20px 24px 24px;
+            border-right: 1px solid rgba(148, 163, 184, 0.18);
+        }
+
+        .panel:last-child {
+            border-right: none;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .panel-header h2 {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .chip {
+            font-size: 0.75rem;
+            padding: 4px 9px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(55, 65, 81, 0.9);
+            color: #e5e7eb;
+        }
+
+        .upload-card {
+            position: relative;
+            border-radius: 18px;
+            padding: 18px 18px 16px;
+            background:
+                radial-gradient(circle at 0 0, rgba(96, 165, 250, 0.16), transparent 60%),
+                radial-gradient(circle at 100% 100%, rgba(94, 234, 212, 0.16), transparent 60%),
+                rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            box-shadow: 0 18px 55px rgba(15, 23, 42, 0.7);
+            text-align: center;
+        }
+
+        .upload-card h3 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 6px;
+        }
+
+        .upload-card p {
+            font-size: 0.82rem;
+            color: #9ca3af;
+            margin-bottom: 18px;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-flex;
+            margin: 0 0 10px;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            position: absolute;
+            opacity: 0;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .file-input-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 18px;
+            background: linear-gradient(135deg, #2563eb, #4f46e5);
+            color: white;
+            border-radius: 999px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            border: 1px solid rgba(191, 219, 254, 0.6);
+            box-shadow: 0 14px 35px rgba(37, 99, 235, 0.5);
+        }
+
+        .file-input-label:hover {
+            background: linear-gradient(135deg, #1d4ed8, #4338ca);
+            transform: translateY(-1px) translateZ(0);
+            box-shadow: 0 18px 45px rgba(37, 99, 235, 0.65);
+        }
+
+        .file-input-label span {
+            display: inline-flex;
+            width: 18px;
+            height: 18px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        #fileName {
+            margin-top: 6px;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        .camera-section {
+            margin-top: 18px;
+            padding-top: 14px;
+            border-top: 1px dashed rgba(148, 163, 184, 0.35);
+            text-align: left;
+        }
+
+        .camera-preview {
+            width: 100%;
+            max-width: 640px;
+            border-radius: 10px;
+            margin: 12px auto 8px;
+            display: block;
+            border: 1px solid rgba(148, 163, 184, 0.35);
+            background: #020617;
+        }
+
+        .btn {
+            padding: 10px 18px;
+            background: rgba(15, 23, 42, 0.9);
+            color: #e5e7eb;
+            border: none;
+            border-radius: 999px;
+            font-size: 0.9em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 6px 6px 0 0;
+            border: 1px solid rgba(55, 65, 81, 0.85);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+        }
+
+        .btn small {
+            font-size: 0.7em;
+            opacity: 0.8;
+        }
+
+        .btn:hover {
+            background: rgba(15, 23, 42, 0.95);
+            transform: translateY(-1px);
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.8);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-color: rgba(74, 222, 128, 0.85);
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ef4444, #b91c1c);
+            border-color: rgba(248, 113, 113, 0.85);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #b91c1c, #7f1d1d);
+        }
+
+        .process-btn {
+            width: 100%;
+            justify-content: center;
+            margin-top: 14px;
+            padding-block: 11px;
+            background: radial-gradient(circle at 0 0, #38bdf8, #2563eb);
+            border-color: rgba(191, 219, 254, 0.75);
+            box-shadow: 0 20px 45px rgba(37, 99, 235, 0.6);
+        }
+
+        .process-btn:hover {
+            background: radial-gradient(circle at 0 0, #0ea5e9, #1d4ed8);
+        }
+
+        .results-section.active {
+            display: block;
+        }
+
+        .result-image {
+            max-width: 100%;
+            border-radius: 10px;
+            margin: 14px 0;
+            box-shadow: 0 16px 40px rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 6px 0 4px;
+        }
+
+        .stat-card {
+            background: radial-gradient(circle at 0 0, rgba(56, 189, 248, 0.16), transparent 55%),
+                        radial-gradient(circle at 100% 100%, rgba(251, 113, 133, 0.16), transparent 55%),
+                        rgba(15, 23, 42, 0.95);
+            padding: 20px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.4);
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #e5e7eb;
+            margin: 10px 0;
+        }
+
+        .stat-label {
+            color: #9ca3af;
+            font-size: 1.1em;
+        }
+
+        .history-section {
+            padding: 14px 24px 20px;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.96));
+        }
+
+        .history-item {
+            background: rgba(15, 23, 42, 0.95);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(148, 163, 184, 0.45);
+            font-size: 0.88rem;
+            color: #e5e7eb;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 12px 0;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #38bdf8;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(248, 113, 113, 0.1);
+            color: #fecaca;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+            display: none;
+            border: 1px solid rgba(248, 113, 113, 0.5);
+            font-size: 0.9rem;
+        }
+
+        .error.active {
+            display: block;
+        }
+
+        .detected-objects {
+            margin-top: 20px;
+        }
+
+        .object-item {
+            background: rgba(15, 23, 42, 0.96);
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 10px;
+            border-left: 3px solid #38bdf8;
+            font-size: 0.86rem;
+            color: #e5e7eb;
+        }
+
+        .results-section h2 {
+            font-size: 0.95rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #9ca3af;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(148, 163, 184, 0.5);
+            font-size: 0.75rem;
+            color: #e5e7eb;
+        }
+
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 999px;
+            background: #22c55e;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-icon">
+                    <div class="brand-icon-inner">🛄</div>
+                </div>
+                <div class="brand-title">
+                    <h1>AI Baggage Counter</h1>
+                    <span>Подсчет багажа на ленте в аэропорту</span>
+                </div>
+            </div>
+            <div class="header-pills">
+                <div class="header-pill">
+                    <span></span>
+                    Реальное время · YOLOv8
+                </div>
+                <div class="header-pill">
+                    Детектирование · Статистика · Отчеты
+                </div>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <section class="panel">
+                <div class="panel-header">
+                    <h2>ВВОД ДАННЫХ</h2>
+                    <div class="chip">Изображения · Камера</div>
+                </div>
+
+                <div class="upload-card">
+                    <h3>Загрузите кадр с ленты</h3>
+                    <p>Поддерживаются изображения и видео. Также можно сделать снимок с веб‑камеры.</p>
+
+                    <div class="file-input-wrapper">
+                        <input type="file" id="fileInput" accept="image/*,video/*" />
+                        <label for="fileInput" class="file-input-label">
+                            <span>+</span>
+                            <span>Выбрать файл</span>
+                        </label>
+                    </div>
+                    <p id="fileName"></p>
+
+                    <div class="camera-section">
+                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                            <h4 style="font-size:0.85rem;color:#9ca3af;text-transform:uppercase;letter-spacing:0.12em;">
+                                СЪЕМКА С КАМЕРЫ
+                            </h4>
+                            <div class="badge">
+                                <span class="badge-dot"></span>
+                                Live stream
+                            </div>
+                        </div>
+
+                        <video id="cameraPreview" class="camera-preview" autoplay playsinline style="display: none;"></video>
+                        <canvas id="captureCanvas" style="display: none;"></canvas>
+
+                        <div style="margin-top:6px;">
+                            <button class="btn btn-secondary" id="startCameraBtn">Камера</button>
+                            <button class="btn" id="captureBtn" style="display: none;">Снимок</button>
+                            <button class="btn btn-danger" id="stopCameraBtn" style="display: none;">Стоп</button>
+                        </div>
+                    </div>
+
+                    <button class="btn process-btn" id="processBtn" disabled>
+                        Запустить анализ
+                        <small>YOLOv8</small>
+                    </button>
+
+                    <div class="loading" id="loading">
+                        <div class="spinner"></div>
+                        <p style="font-size:0.85rem;color:#9ca3af;margin-top:6px;">Обработка кадра моделью…</p>
+                    </div>
+
+                    <div class="error" id="error"></div>
+                </div>
+            </section>
+
+            <section class="panel" style="border-left:1px solid rgba(15,23,42,0.9);">
+                <div class="panel-header" style="margin-bottom:10px;">
+                    <h2>РЕЗУЛЬТАТЫ И СТАТИСТИКА</h2>
+                    <div class="chip">Визуализация детекций</div>
+                </div>
+
+                <div class="results-section" id="results">
+                    <div class="stats">
+                        <div class="stat-card">
+                            <div class="stat-label">Обнаружено багажа</div>
+                            <div class="stat-value" id="luggageCount">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Всего объектов</div>
+                            <div class="stat-value" id="objectsCount">0</div>
+                        </div>
+                    </div>
+
+                    <img id="resultImage" class="result-image" alt="Результат обработки" />
+                    <div class="detected-objects" id="detectedObjects"></div>
+                </div>
+
+                <div style="margin-top:14px;">
+                    <div class="panel-header" style="margin-bottom:8px;">
+                        <h2>ИСТОРИЯ ЗАПРОСОВ</h2>
+                        <div class="chip">JSON · Отчеты</div>
+                    </div>
+                    <div style="margin-bottom:8px;">
+                        <button class="btn btn-secondary" id="loadHistoryBtn">История</button>
+                        <button class="btn" id="generateReportBtn">PDF отчёт</button>
+                        <button class="btn" id="generateExcelBtn">Excel отчёт</button>
+                    </div>
+                    <div id="historyList" style="max-height:210px;overflow:auto;padding-right:4px;"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const fileInput = document.getElementById('fileInput');
+        const processBtn = document.getElementById('processBtn');
+        const loading = document.getElementById('loading');
+        const error = document.getElementById('error');
+        const results = document.getElementById('results');
+        const resultImage = document.getElementById('resultImage');
+        const luggageCount = document.getElementById('luggageCount');
+        const objectsCount = document.getElementById('objectsCount');
+        const detectedObjects = document.getElementById('detectedObjects');
+        const fileName = document.getElementById('fileName');
+        const startCameraBtn = document.getElementById('startCameraBtn');
+        const captureBtn = document.getElementById('captureBtn');
+        const stopCameraBtn = document.getElementById('stopCameraBtn');
+        const cameraPreview = document.getElementById('cameraPreview');
+        const captureCanvas = document.getElementById('captureCanvas');
+        const loadHistoryBtn = document.getElementById('loadHistoryBtn');
+        const generateReportBtn = document.getElementById('generateReportBtn');
+        const generateExcelBtn = document.getElementById('generateExcelBtn');
+        const historyList = document.getElementById('historyList');
+
+        let stream = null;
+        let selectedFile = null;
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) {
+                selectedFile = e.target.files[0];
+                fileName.textContent = `Выбран файл: ${selectedFile.name}`;
+                processBtn.disabled = false;
+            }
+        });
+
+        startCameraBtn.addEventListener('click', async () => {
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ video: true });
+                cameraPreview.srcObject = stream;
+                cameraPreview.style.display = 'block';
+                startCameraBtn.style.display = 'none';
+                captureBtn.style.display = 'inline-block';
+                stopCameraBtn.style.display = 'inline-block';
+            } catch (err) {
+                showError('Ошибка доступа к камере: ' + err.message);
+            }
+        });
+
+        captureBtn.addEventListener('click', () => {
+            const context = captureCanvas.getContext('2d');
+            captureCanvas.width = cameraPreview.videoWidth;
+            captureCanvas.height = cameraPreview.videoHeight;
+            context.drawImage(cameraPreview, 0, 0);
+            
+            captureCanvas.toBlob((blob) => {
+                selectedFile = new File([blob], 'camera_capture.jpg', { type: 'image/jpeg' });
+                fileName.textContent = 'Снимок сделан с камеры';
+                processBtn.disabled = false;
+            }, 'image/jpeg');
+        });
+
+        stopCameraBtn.addEventListener('click', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+                stream = null;
+            }
+            cameraPreview.srcObject = null;
+            cameraPreview.style.display = 'none';
+            startCameraBtn.style.display = 'inline-block';
+            captureBtn.style.display = 'none';
+            stopCameraBtn.style.display = 'none';
+        });
+
+        processBtn.addEventListener('click', async () => {
+            if (!selectedFile) {
+                showError('Пожалуйста, выберите файл или сделайте снимок с камеры');
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+
+            loading.classList.add('active');
+            error.classList.remove('active');
+            results.classList.remove('active');
+            processBtn.disabled = true;
+
+            try {
+                const response = await fetch('/api/process', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultImage.src = data.result_image;
+                    luggageCount.textContent = data.luggage_count;
+                    objectsCount.textContent = data.detected_objects.length;
+                    
+                    detectedObjects.innerHTML = '<h3>Обнаруженные объекты:</h3>';
+                    data.detected_objects.forEach(obj => {
+                        const objDiv = document.createElement('div');
+                        objDiv.className = 'object-item';
+                        objDiv.innerHTML = `
+                            <strong>${obj.class}</strong> - уверенность: ${(obj.confidence * 100).toFixed(1)}%
+                        `;
+                        detectedObjects.appendChild(objDiv);
+                    });
+
+                    results.classList.add('active');
+                } else {
+                    showError(data.error || 'Ошибка обработки');
+                }
+            } catch (err) {
+                showError('Ошибка при отправке запроса: ' + err.message);
+            } finally {
+                loading.classList.remove('active');
+                processBtn.disabled = false;
+            }
+        });
+
+        loadHistoryBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/history');
+                const history = await response.json();
+                
+                historyList.innerHTML = '';
+                if (history.length === 0) {
+                    historyList.innerHTML = '<p>История пуста</p>';
+                    return;
+                }
+
+                history.reverse().forEach(entry => {
+                    const item = document.createElement('div');
+                    item.className = 'history-item';
+                    const date = new Date(entry.timestamp);
+                    item.innerHTML = `
+                        <strong>${date.toLocaleString('ru-RU')}</strong><br>
+                        Файл: ${entry.filename}<br>
+                        Обнаружено багажа: ${entry.luggage_count}
+                    `;
+                    historyList.appendChild(item);
+                });
+            } catch (err) {
+                showError('Ошибка загрузки истории: ' + err.message);
+            }
+        });
+
+        generateReportBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/generate-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'pdf' })
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `luggage_report_${new Date().toISOString().split('T')[0]}.pdf`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    const data = await response.json();
+                    showError(data.error || 'Ошибка генерации отчета');
+                }
+            } catch (err) {
+                showError('Ошибка генерации отчета: ' + err.message);
+            }
+        });
+
+        generateExcelBtn.addEventListener('click', async () => {
+            try {
+                const response = await fetch('/api/generate-report', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ type: 'excel' })
+                });
+
+                if (response.ok) {
+                    const blob = await response.blob();
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = `luggage_report_${new Date().toISOString().split('T')[0]}.xlsx`;
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    window.URL.revokeObjectURL(url);
+                } else {
+                    const data = await response.json();
+                    showError(data.error || 'Ошибка генерации отчета');
+                }
+            } catch (err) {
+                showError('Ошибка генерации отчета: ' + err.message);
+            }
+        });
+
+        function showError(message) {
+            error.textContent = message;
+            error.classList.add('active');
+        }
+    </script>
+</body>
+</html>
